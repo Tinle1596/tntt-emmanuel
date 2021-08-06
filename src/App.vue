@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <navbar></navbar>
-    <div id="nav">
-      <!-- <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> -->
-    </div>
-    <router-view />
+    <v-app id="inspire">      
+      <navbar></navbar>
+      <v-main>
+        <router-view />
+      </v-main>
+    </v-app>
   </div>
 </template>
 
@@ -13,12 +13,15 @@
 // @ is an alias to /src
 import navbar from './components/nagivation/navbar.vue'
 
-
 export default {
   name: "Home",
   components: {
     navbar
   },
+  data: () => ({
+    drawer: false,
+    group: null,
+  }),
 };
 </script>
 
@@ -29,18 +32,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  overflow: hidden;
 }
 
 #nav {
   padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
