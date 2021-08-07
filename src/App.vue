@@ -3,7 +3,7 @@
     <v-app id="inspire">      
       <navbar></navbar>
       <v-main>
-        <router-view />
+          <router-view />
       </v-main>
     </v-app>
   </div>
@@ -38,4 +38,5 @@ export default {
 #nav {
   padding: 30px;
 }
+
 </style>
