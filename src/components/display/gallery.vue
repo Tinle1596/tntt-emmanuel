@@ -1,5 +1,5 @@
 <template>
-  <v-carousel v-model="model" hide-delimiters>
+  <v-carousel v-model="model" hide-delimiters height="auto">
       <v-carousel-item v-for="(image, i) in images" :key="i" :src="image.src">
       </v-carousel-item>
   </v-carousel>

@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <v-container>
-      <v-banner id="quote" elevation="1" rounded single-line>
-        "this is where a nice quote would go"
+    <v-container class="pa-0">
+      <v-banner id="quote" elevation="0" rounded single-line>
+        "Cầu Nguyện, Rước Lễ, Hy Sinh, Làm Việc Tông Đồ"
       </v-banner>
       <gallery></gallery>
       <mission-statement></mission-statement>
