@@ -1,7 +1,9 @@
 <template>
   <div class="missionstatement">
     <v-card>
-      <v-card-title> purpose </v-card-title>
+      <v-card-subtitle>
+        Goal
+      </v-card-subtitle>
       <v-card-text>
         {{ purposeStatement }}
       </v-card-text>      
