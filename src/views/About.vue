@@ -1,5 +1,25 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="aboutpage">
+    <about-us class="pa-2"></about-us>
   </div>
 </template>
+
+<script>
+import AboutUs from '../components/resource/aboutus.vue'
+
+export default {
+  data: () => ({
+
+  }),
+  components: {
+    AboutUs
+  },
+  computed: {
+
+  }
+};
+</script>
+
+<style>
+
+</style>

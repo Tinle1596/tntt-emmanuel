@@ -6,7 +6,7 @@
       href="https://www.instagram.com/doanemmanuel/"
       target="_blank"
     >
-      <v-card-text>{{ followInstagram }}</v-card-text>
+      <v-card-text>{{ translation.homeInstagram }}</v-card-text>
       <v-icon color="black" x-large>mdi-instagram</v-icon>
     </v-card>
   </div>
@@ -21,7 +21,7 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      followInstagram: "getInstagramFollowStatement",
+      translation: 'getTranslation'
     }),
   },
   method: {},
