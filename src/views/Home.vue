@@ -6,6 +6,10 @@
       </v-banner>
       <gallery></gallery>
       <mission-statement></mission-statement>
+      <v-container class="d-flex justify-center">
+        <social-media class="pa-1"></social-media>
+        <register class="pa-1"></register>
+      </v-container>
     </v-container>
   </div>
 </template>
@@ -13,11 +17,13 @@
 <script>
 // @ is an alias to /src
 import Gallery from "../components/display/gallery.vue";
-import MissionStatement from "../components/display/mission.vue";
+import MissionStatement from "../components/display/goalstatement.vue";
+import SocialMedia from "../components/links/socialmedia.vue";
+import Register from '../components/links/register.vue'
 
 export default {
   name: "Home",
-  components: { Gallery, MissionStatement },
+  components: { Gallery, MissionStatement, SocialMedia, Register },
 };
 </script>
 

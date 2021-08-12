@@ -5,7 +5,7 @@
         Goal
       </v-card-subtitle>
       <v-card-text>
-        {{ purposeStatement }}
+        {{ goalStatement }}
       </v-card-text>      
     </v-card>
   </div>
@@ -20,7 +20,7 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      purposeStatement: 'getPurposeStatement'
+      goalStatement: 'getGoalStatement'
     })
   },
   methods: {
