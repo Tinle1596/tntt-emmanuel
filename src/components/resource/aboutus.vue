@@ -2,13 +2,27 @@
   <div class="aboutus">
     <v-card class="pa-1">
       <v-card-title class="text-center justify-center">
-        <h1>{{ translation.aboutUsTitle }}</h1>
+        <h1>{{ info.aboutUsTitle }}</h1>
       </v-card-title>
-      <v-tabs v-model="tab">
-        <v-tab> test </v-tab>
-        <v-tab> test </v-tab>
-        <v-tab> test </v-tab>
-      </v-tabs>
+      <v-divider></v-divider>
+      <v-tabs v-model="tab" show-arrows left>
+        <v-tab v-for="(i, index) in info.aboutUsInfo" :key="index">
+          {{ i.subtitle }}
+        </v-tab>
+      </v-tabs>      
+      <v-tabs-items v-model="tab">
+        <v-tab-item v-for="(i, index) in info.aboutUsInfo" :key="index">
+          <v-list>
+            <v-list-item v-for="(j, index) in i.arr" :key="index" dense>
+              <v-list-item-content class="text-left">
+                <li>
+                  {{ j }}
+                </li>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-tab-item>
+      </v-tabs-items>
     </v-card>
   </div>
 </template>
@@ -17,11 +31,12 @@
 import { mapGetters } from "vuex";
 export default {
   data: () => ({
-      tab: null
+    tab: null,
   }),
   computed: {
     ...mapGetters({
-      translation: 'getTranslation'
+      //Gets information in specified language
+      info: "getTranslation",
     }),
   },
 };

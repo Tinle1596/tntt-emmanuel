@@ -1,6 +1,8 @@
 <template>
   <div class="aboutpage">
-    <about-us class="pa-2"></about-us>
+    <v-container class="fluid">
+      <about-us class="pa-2"></about-us>
+    </v-container>    
   </div>
 </template>
 
