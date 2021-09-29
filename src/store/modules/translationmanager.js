@@ -62,6 +62,8 @@ const state = {
                     ]
             }
         }
+
+        // Leaders page
     },
 
     vietnamese: {
@@ -127,11 +129,15 @@ const state = {
                         "Thiếu Nhi thực hiện hoa thiêng, Chép ghi mỗi tối cộng biên mỗi tuần.",
                     ]
             }
-        }
+        },
+        // Leaders page
     }
 }
 
 const getters = {
+    getLanguage() {
+        return state.isTranslated;
+    },
     //returns vietnamese or english info
     getTranslation: () => {
         if (state.isTranslated) {

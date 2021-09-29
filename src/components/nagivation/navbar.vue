@@ -46,6 +46,11 @@ export default {
         icon: "mdi-information",
         text: "About",
         route: "/about"
+      },
+      {
+        icon: "mdi-account-group",
+        text: "Leaders",
+        route: "/Leaders"
       }
     ]
   }),
