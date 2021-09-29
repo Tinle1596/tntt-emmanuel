@@ -11,7 +11,9 @@ import LeaderCard from "../components/resource/leadercard.vue";
 import { mapGetters } from "vuex";
 
 export default {
-  data: () => ({}),
+  data: () => ({
+    
+  }),
   components: {
     LeaderCard,
   },

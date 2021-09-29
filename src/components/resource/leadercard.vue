@@ -2,7 +2,7 @@
   <div class="leader-card">
       <v-card>
           <v-card-title primary-title>
-               {{}} {{}}
+               
           </v-card-title>
       </v-card>
   </div>
