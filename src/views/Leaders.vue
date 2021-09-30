@@ -8,7 +8,7 @@
 
 <script>
 import LeaderCard from "../components/resource/leadercard.vue";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   data: () => ({
@@ -17,11 +17,19 @@ export default {
   components: {
     LeaderCard,
   },
+  methods: {
+    ...mapActions({
+      getLeaders: 'getLeaders'
+    })
+  },
   computed: {
     ...mapGetters({
       isTranslated: 'getLanguage'
     }),
   },
+  created() {
+    this.getLeaders();
+  }
 };
 </script>
 

@@ -9,6 +9,7 @@
 </template>
 
 <script>
+
 export default {
     data: () => ({
 
@@ -21,6 +22,10 @@ export default {
         leaderName: String,
         leaderEmail: String,
         leaderNgang: String
+    },
+
+    created() {
+
     }
 }
 </script>

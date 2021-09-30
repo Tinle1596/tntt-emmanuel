@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import translationmanager from './modules/translationmanager'
+import leaders from './modules/leaders'
 
 
 Vue.use(Vuex);
@@ -9,7 +10,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    translationmanager
+    translationmanager,
+    leaders
   },
   strict: false
 });

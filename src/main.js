@@ -6,11 +6,9 @@ import store from './store'
 import { initializeApp } from 'firebase/app'
 import { firebaseConfig } from './firebase-config'
 import 'firebase/firestore'
-import { getFirestore } from 'firebase/firestore'
 
-const app = initializeApp(firebaseConfig);
 
-export const db = getFirestore(app);
+initializeApp(firebaseConfig);
 
 Vue.config.productionTip = false
 
