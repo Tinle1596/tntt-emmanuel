@@ -5,12 +5,13 @@ const state = {
 }
 
 const getters = {
-
+    getLeaders() {
+        return state.leaders;
+    }
 }
 
 const mutations = {
     SET_LEADERS(state, val) {
-        console.log(val);
         state.leaders = val
     }
 }
@@ -19,9 +20,9 @@ const actions = {
     async getLeaders({commit}) {
         const results = [];
         const snap = await getDocs(collection(getFirestore(), 'leaders'));
-        snap.forEach((doc) => {
-            results.push({id: doc.id, ...doc.data() });
-        });
+        snap.forEach((doc) => {            
+            results.push({id: doc.id, ...doc.data()});
+        });                
         commit('SET_LEADERS', results);
     }
 }

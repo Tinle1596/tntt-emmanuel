@@ -1,35 +1,45 @@
 <template>
   <div>
-    <leader-card></leader-card>
-    <v-card v-if="isTranslated"> vietnamese </v-card>
-    <v-card> english </v-card>
+    <v-container>
+      <div class="pa-2" v-for="(leader, index) in leaders" :key="index">        
+        <leader-card
+          :type="leader.type"
+          :name="leader.name"
+          :email="leader.email"
+          :group="leader.group"
+          :isLead="leader.isLead"
+        />
+      </div>
+    </v-container>
   </div>
 </template>
 
 <script>
 import LeaderCard from "../components/resource/leadercard.vue";
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters,  mapActions } from "vuex";
 
 export default {
-  data: () => ({
-    
-  }),
+  data: () => ({}),
   components: {
     LeaderCard,
   },
   methods: {
     ...mapActions({
-      getLeaders: 'getLeaders'
-    })
+      getLeaders: "getLeaders",
+    }),
   },
   computed: {
     ...mapGetters({
-      isTranslated: 'getLanguage'
+      isTranslated: "getLanguage",
+      leaders: "getLeaders"
     }),
+    // ...mapState({
+    //   leaders: "leaders",
+    // }),
   },
   created() {
     this.getLeaders();
-  }
+  },
 };
 </script>
 

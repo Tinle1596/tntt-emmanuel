@@ -1,9 +1,9 @@
 <template>
   <div class="leader-card">
-      <v-card>
-          <v-card-title primary-title>
-               
-          </v-card-title>
+      <v-card>        
+          <v-card-title primary-title>                            
+              {{type}} - {{name}}
+          </v-card-title>    
       </v-card>
   </div>
 </template>
@@ -11,19 +11,20 @@
 <script>
 
 export default {
-    data: () => ({
+    props: {
+        type: String,
+        name: String,
+        email: String,
+        group: String,
+        isLead: Boolean
+    },
 
+    data: () => ({
     }),
     components: {
 
     },
-    props: {
-        leaderType: String,
-        leaderName: String,
-        leaderEmail: String,
-        leaderNgang: String
-    },
-
+    
     created() {
 
     }
