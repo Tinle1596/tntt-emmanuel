@@ -23,10 +23,7 @@ export default {
       translation: 'getTranslation'
     })
   },
-  methods: {
-    ...mapActions({
-      
-    })
+  methods: {    
   }
 };
 </script>
