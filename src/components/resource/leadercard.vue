@@ -30,7 +30,7 @@ export default {
 
   data: () => ({
     exampleAvatar: "https://i.imgur.com/y7oYbiP.jpg",
-    reveal: false // TODO: 
+    reveal: false // TODO: add reveal panel in case of more information is needed
   }),
   components: {},
   methods: {},

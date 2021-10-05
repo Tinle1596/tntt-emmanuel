@@ -10,8 +10,10 @@
 </template>
 
 <script>
+import { onAuthStateChanged } from '@firebase/auth';
 // @ is an alias to /src
 import navbar from './components/nagivation/navbar.vue'
+import {getAuth} from './firebase'
 
 export default {
   name: "Home",
@@ -21,7 +23,7 @@ export default {
   data: () => ({
     drawer: false,
     group: null,
-  }),
+  })  
 };
 </script>
 

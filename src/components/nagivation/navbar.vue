@@ -16,21 +16,24 @@
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
-      </v-list>
+      </v-list>      
       <template v-slot:append>
-        <div class="pa-2">
+        <v-btn class="ma-1" v-if="!user" :to="login">Login</v-btn>
+        <v-btn class="ma-1" v-else :to="logout">Log out</v-btn>
+        <div class="pa-1">
           <v-card elevation="0" class="d-flex justify-space-between">
             <div class="pa-2 align-self-center">Tiếng Việt</div>
             <v-switch class="pa-2" @click="toggleTranslation()"></v-switch>
           </v-card>
-        </div>
+        </div>        
       </template>
     </v-navigation-drawer>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+
 
 export default {
   data: () => ({
@@ -50,15 +53,31 @@ export default {
       {
         icon: "mdi-account-group",
         text: "Leaders",
-        route: "/Leaders"
+        route: "/leaders"
+      },
+      {
+        icon: "mdi-checkbox-blank-circle-outline",
+        text: "admin",
+        route: "/admin"
       }
-    ]
+    ],
+    login: "/login",
+    logout: "/logout"
   }),
   methods: {
     ...mapActions({
       toggleTranslation: "toggleTranslation"
-    })
-  }
+    }),
+    isUserLoggedIn() {      
+      (this.user !== null) ? true : false; 
+    },
+
+  },
+  computed: {
+     ...mapGetters({
+       user: 'getUser'
+     })
+  }  
 };
 </script>
 
