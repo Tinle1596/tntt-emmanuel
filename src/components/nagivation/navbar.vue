@@ -59,6 +59,11 @@ export default {
         icon: "mdi-checkbox-blank-circle-outline",
         text: "admin",
         route: "/admin"
+      },
+      {
+        icon:"mid-checkbox-blank-circle",
+        text: "bulletin",
+        route: "/bulletin"
       }
     ],
     login: "/login",

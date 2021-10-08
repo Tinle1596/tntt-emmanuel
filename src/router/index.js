@@ -30,6 +30,12 @@ const routes = [
     meta: {requiresAuth: true}
   },
   {
+    path: '/bulletin',
+    name: 'bulletin',
+    component: () => import('../views/Bulletin.vue'),
+    meta: {requiresAuth: true}
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
