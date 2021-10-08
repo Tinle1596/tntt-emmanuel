@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <v-container class="pa-0">
+    <v-container class="pa-2">
       <v-banner id="quote" elevation="0" rounded single-line>
         "Cầu Nguyện, Rước Lễ, Hy Sinh, Làm Việc Tông Đồ"
       </v-banner>

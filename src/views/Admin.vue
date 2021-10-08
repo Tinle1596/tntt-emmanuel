@@ -1,15 +1,20 @@
 <template>
-  <div>
-      this is the admin page
+  <div class="admin">
+    <v-container>
+      <under-construction/>
+    </v-container>
   </div>
 </template>
 
 <script>
-export default {
+import UnderConstruction from "../components/common/underconstruction.vue";
 
-}
+export default {
+  components: {
+    UnderConstruction
+  },
+};
 </script>
 
 <style>
-
 </style>
