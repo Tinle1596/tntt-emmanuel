@@ -13,6 +13,7 @@
 // @ is an alias to /src
 import navbar from './components/nagivation/navbar.vue'
 
+
 export default {
   name: "Home",
   components: {
@@ -26,8 +27,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/variables.scss";
+
+v-app {
+  font-family: $body-font-family !important;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

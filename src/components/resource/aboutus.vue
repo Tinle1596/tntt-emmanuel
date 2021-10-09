@@ -1,15 +1,15 @@
 <template>
   <div class="aboutus">
     <v-card class="pa-1">
-      <v-card-title class="text-center justify-center">
-        <h1>{{ info.aboutUsTitle }}</h1>
-      </v-card-title>
+        <v-card-title class="text-center justify-center">
+          <h2>{{ info.aboutUsTitle }}</h2>
+        </v-card-title>
       <v-divider></v-divider>
-      <v-tabs v-model="tab" show-arrows left>
+      <v-tabs v-model="tab" show-arrows left color="secondary">
         <v-tab v-for="(i, index) in info.aboutUsInfo" :key="index">
           {{ i.subtitle }}
         </v-tab>
-      </v-tabs>      
+      </v-tabs>
       <v-tabs-items v-model="tab">
         <v-tab-item v-for="(i, index) in info.aboutUsInfo" :key="index">
           <v-list>

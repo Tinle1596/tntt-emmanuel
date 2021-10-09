@@ -1,8 +1,10 @@
 <template>
-  <v-carousel v-model="model" hide-delimiters width="100vh" height="40vh">
+  <v-container>
+    <v-carousel v-model="model" hide-delimiters width="100vh" height="40vh">
       <v-carousel-item v-for="(image, i) in images" :key="i" :src="image.src">
       </v-carousel-item>
-  </v-carousel>
+    </v-carousel>
+  </v-container>
 </template>
 
 <script>
@@ -11,17 +13,17 @@ export default {
     model: 0,
     images: [
       {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-          },
+        src: require("@/assets/sampletntt/TNTT_Sample_1.jpg"),
+      },
+      {
+        src: require("@/assets/sampletntt/TNTT_Sample_2.jpg"),
+      },
+      {
+        src: require("@/assets/sampletntt/TNTT_Sample_3.jpg"),
+      },
+      {
+        src: require("@/assets/sampletntt/TNTT_Sample_4.jpg"),
+      },
     ],
   }),
 };

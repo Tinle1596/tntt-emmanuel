@@ -9,10 +9,9 @@ export default new Vuetify({
     theme: {
         themes: {
             light: {
-                // primary: colors.red ,
-                // secondary: ,
-                // accent: 
-
+                primary: '#59a5d8',
+                secondary: '#2f6690',
+                accent: "#133c55"
             }
         }
     }

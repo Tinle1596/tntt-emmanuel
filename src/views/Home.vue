@@ -1,14 +1,17 @@
 <template>
   <div class="home">
     <v-container class="pa-2">
-      <v-banner id="quote" elevation="0" rounded single-line>
-        "Cầu Nguyện, Rước Lễ, Hy Sinh, Làm Việc Tông Đồ"
+      <v-banner id="quote" elevation="0" rounded>
+        <div>          
+          <h2 class="font-weight-bold">"Cầu Nguyện, Rước Lễ, Hy Sinh, Làm Việc Tông Đồ"</h2>
+        </div>
       </v-banner>
       <gallery></gallery>
-      <mission-statement></mission-statement>
+      <v-card class="ma-2">
+        <mission-statement></mission-statement>
+      </v-card>
       <v-container class="d-flex justify-center">
-        <social-media class="pa-1"></social-media>
-        <register class="pa-1"></register>
+        <links></links>
       </v-container>
     </v-container>
   </div>
@@ -18,17 +21,16 @@
 // @ is an alias to /src
 import Gallery from "../components/display/gallery.vue";
 import MissionStatement from "../components/display/goalstatement.vue";
-import SocialMedia from "../components/links/socialmedia.vue";
-import Register from '../components/links/register.vue'
+import Links from "../components/links/links.vue";
 
 export default {
   name: "Home",
-  components: { Gallery, MissionStatement, SocialMedia, Register },
+  components: { Gallery, MissionStatement, Links },
 };
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 
 #quote {
   font-family: "Dancing Script", cursive;

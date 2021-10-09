@@ -24,7 +24,7 @@
                 ></v-text-field>
               </v-col>
             </v-row>
-            <v-btn color="light-green" @click="onLogin()">Login</v-btn>
+            <v-btn color="accent" @click="onLogin()">Login</v-btn>
           </v-container>
         </v-form>
       </v-card>

@@ -7,7 +7,7 @@
         </v-avatar>
         <div>
           <v-card-title>{{ type }} {{ name }}</v-card-title>
-          <v-card-subtitle>{{email}}</v-card-subtitle>
+          <v-card-subtitle class="justify-left">{{email}}</v-card-subtitle>
           <v-card-actions class="justify-left">
               <v-chip class="ma-1" :color="getNganhColor" label small active>{{ group }}</v-chip> 
               <v-chip class="ma-1" v-if="isLead" label small>Nganh Truong</v-chip>

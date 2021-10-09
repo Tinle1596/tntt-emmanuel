@@ -1,10 +1,10 @@
 <template>
   <div class="missionstatement">
-    <v-card>
-      <v-card-subtitle>
-        Goal
+    <v-card flat dense color="">
+      <v-card-subtitle class="black--text">
+        <h3>Goal</h3>
       </v-card-subtitle>
-      <v-card-text>
+      <v-card-text class="black--text">
         {{ translation.homeGoalStatement }}
       </v-card-text>      
     </v-card>

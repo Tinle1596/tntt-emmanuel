@@ -1,13 +1,13 @@
 <template>
   <div id="nav">
-    <v-app-bar fixed dense hide-on-scroll>
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      <v-app-bar-title>Doan Emmanuel</v-app-bar-title>
+    <v-app-bar fixed dense hide-on-scroll color="secondary">
+      <v-app-bar-nav-icon @click="drawer = true" class="white--text"></v-app-bar-nav-icon>
+      <v-app-bar-title class="white--text">Doan Emmanuel</v-app-bar-title>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" absolute app temporary>
       <v-list nav dense>
         <v-list-item-group v-model="link">
-          <v-list-item v-for="link in links" :key="link.icon" :to="link.route">
+          <v-list-item v-for="link in links" :key="link.icon" :to="link.route" color="accent">
             <v-list-item-avatar>
               <v-icon v-text="link.icon"></v-icon>
             </v-list-item-avatar>
@@ -18,8 +18,8 @@
         </v-list-item-group>
       </v-list>      
       <template v-slot:append>
-        <v-btn class="ma-1" v-if="!user" :to="login">Login</v-btn>
-        <v-btn class="ma-1" v-else :to="logout">Log out</v-btn>
+        <v-btn class="ma-1" color="accent" v-if="!user" :to="login">Login</v-btn>
+        <v-btn class="ma-1" color="red" v-else :to="logout">Log out</v-btn>
         <div class="pa-1">
           <v-card elevation="0" class="d-flex justify-space-between">
             <div class="pa-2 align-self-center">Tiếng Việt</div>
@@ -56,13 +56,13 @@ export default {
         route: "/leaders"
       },
       {
-        icon: "mdi-checkbox-blank-circle-outline",
-        text: "admin",
+        icon: "mdi-view-dashboard",
+        text: "Admin",
         route: "/admin"
       },
       {
-        icon:"mid-checkbox-blank-circle",
-        text: "bulletin",
+        icon:"mdi-bulletin-board",
+        text: "Bulletin",
         route: "/bulletin"
       }
     ],
