@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      getLeaders: "getLeaders",
+      setLeaders: "setLeaders",
     }),
   },
   computed: {
@@ -38,7 +38,7 @@ export default {
     // }),
   },
   created() {
-    this.getLeaders();
+    this.setLeaders();
   },
 };
 </script>

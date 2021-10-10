@@ -5,7 +5,9 @@ const state = {
 }
 
 const getters = {
-    
+    getLeaders() {
+        return state.leaders;
+    }
 }
 
 const mutations = {
@@ -15,7 +17,7 @@ const mutations = {
 }
 
 const actions = {
-    async getLeaders({ commit }) {
+    async setLeaders({ commit }) {
         const results = [];
         try {
             const snap = await getDocs(collection(getFirestore(), 'leaders'));
