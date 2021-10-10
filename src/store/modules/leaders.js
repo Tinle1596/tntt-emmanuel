@@ -1,13 +1,11 @@
-import { getFirestore, collection, getDocs} from 'firebase/firestore'
+import { getFirestore, collection, getDocs } from 'firebase/firestore'
 
 const state = {
     leaders: []
 }
 
 const getters = {
-    getLeaders() {
-        return state.leaders;
-    }
+    
 }
 
 const mutations = {
@@ -17,13 +15,17 @@ const mutations = {
 }
 
 const actions = {
-    async getLeaders({commit}) {
+    async getLeaders({ commit }) {
         const results = [];
-        const snap = await getDocs(collection(getFirestore(), 'leaders'));
-        snap.forEach((doc) => {            
-            results.push({id: doc.id, ...doc.data()});
-        });                
-        commit('SET_LEADERS', results);
+        try {
+            const snap = await getDocs(collection(getFirestore(), 'leaders'));
+            snap.forEach((doc) => {
+                results.push({ id: doc.id, ...doc.data() });
+            })
+            commit('SET_LEADERS', results);
+        } catch (e) {
+            alert(e.message);
+        }        
     }
 }
 
