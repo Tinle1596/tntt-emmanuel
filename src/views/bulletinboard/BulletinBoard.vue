@@ -5,16 +5,18 @@
 </template>
 
 <script>
-// import UnderConstruction from '../components/common/underconstruction.vue'
-import Bulletins from '../components/bulletin/bulletins.vue'
+import Bulletins from '../../components/bulletin/bulletins.vue'
+import {mapActions, mapState} from 'vuex'
 
 export default {
     data:() => ({
 
     }),
     components: {
-      // UnderConstruction
-      Bulletins
+      Bulletins,
+    },
+    methods: {
+      
     }
 }
 </script>

@@ -62,8 +62,8 @@ export default {
       },
       {
         icon:"mdi-bulletin-board",
-        text: "Bulletin",
-        route: "/bulletin"
+        text: "Bulletin Board",
+        route: "/bulletinboard"
       }
     ],
     login: "/login",
