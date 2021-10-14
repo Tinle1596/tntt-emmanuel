@@ -1,4 +1,5 @@
-import { getFirestore, collection, doc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, deleteField } from 'firebase/firestore'
+import { getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, deleteField } from 'firebase/firestore'
+import createPersistedState from 'vuex-persistedstate'
 
 const state = {
     // object: {
@@ -9,12 +10,16 @@ const state = {
     //     eventDate: '',
     //     tags: []
     // }
-    bulletins: []
+    bulletins: [],
+    bulletin: {}
 }
 
 const getters = {
     getBulletins() {
         return state.bulletins;
+    },
+    getBulletin(){
+        return state.bulletin;
     }
 }
 
@@ -22,7 +27,9 @@ const mutations = {
     SET_BULLETINS(state, val) {
         state.bulletins = val;
     },
-
+    SET_BULLETIN(state, val) {
+        state.bulletin = val
+    },
     CREATE_BULLETIN(state, val) {
         state.bulletins.push(val);
     },
@@ -37,7 +44,7 @@ const mutations = {
 }
 
 const actions = {
-    // Getting Bulletin
+    // Getting Bulletins
     async setBulletins({ commit }) {
         const results = [];
         await getDocs(collection(getFirestore(), 'bulletins'))
@@ -50,6 +57,18 @@ const actions = {
             .catch((e) => {
                 alert('Unsuccessful opertion', e.message);
             })
+    },
+    // getting bulletin by id
+    async getBulletinById({ commit }, id) {
+        const docRef = doc(getFirestore(), 'bulletins', id);
+        await getDoc(docRef).then((snapShot) =>{
+            if(snapShot.exists()) {            
+                const docData = snapShot.data()           
+                commit('SET_BULLETIN', docData);
+            } else {
+                alert('No document found');
+            }    
+        });        
     },
     // Creating Bulletin
     async createBulletin({ commit, payload }) {

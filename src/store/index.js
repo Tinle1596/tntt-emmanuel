@@ -6,11 +6,13 @@ import auth from './modules/auth'
 import bulletins from './modules/bulletins'
 
 
+
+
 Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== "production"
 
-export default new Vuex.Store({
+export default new Vuex.Store({  
   modules: {
     translationmanager,
     leaders,

@@ -44,8 +44,8 @@ const routes = [
   {
     path: '/bulletinboard/bulletin/edit/:id',
     name: 'editbulletin',
-    component: () => import('../views/bulletinboard/EditBulletin.vue'),
-    meta: {requiresAuth: true}    
+    component: () => import('../components/bulletin/editbulletin.vue'),
+    meta: {requiresAuth: true}
   },
   {
     path: '/about',

@@ -24,16 +24,16 @@ export default {
   methods: {
     ...mapActions({
       createBulletin: 'createBulletin',
-      updateBulletin: 'updateBulleting'
+      updateBulletin: 'updateBulletin'
     }),
   },
   computed: {
     ...mapGetters({
-      bulletins: "getBulletins",
+      bulletins: 'getBulletins',
     }),
   },
   created() {
-    this.$store.dispatch("setBulletins");
+    this.$store.dispatch('setBulletins');
   },
 };
 </script>
