@@ -1,5 +1,6 @@
 import { getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, deleteField } from 'firebase/firestore'
 import { convertUnixDate } from '../../common/formatter'
+import router from '../../router/index'
 
 const state = {
     // object: {
@@ -131,8 +132,9 @@ const actions = {
             lastUpdated: new Date(),
             tags: payload.tags
         })
-            .then((result) => {
+            .then(() => {
                 console.log('bulletin updated successfully')
+                router.push({name: 'bulletin', params: {id: payload.id}});
                 // commit('UPDATE_BULLETIN', result);
             })
             .catch((e) => {

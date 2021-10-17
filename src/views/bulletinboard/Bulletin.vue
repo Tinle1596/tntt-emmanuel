@@ -1,6 +1,6 @@
 <template>
   <div class="bulletin">
-    single bulletin view
+    {{currentBulletin}}
     <h3>{{ $route.params.id }}</h3>
     <v-btn :to="{ name: 'editbulletin', params: { id: $route.params.id } }"
       >Edit</v-btn
@@ -9,10 +9,17 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   data: () => ({}),
   components: {
 
+  },
+  computed: {
+    ...mapGetters({
+      currentBulletin: 'getBulletin'
+    })
   },
 
   created() {

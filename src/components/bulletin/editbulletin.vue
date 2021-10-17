@@ -1,7 +1,6 @@
 <template>
   <div class="edit-bulletin">
     <v-container>
-      {{ currentBulletin }}
       <v-card rounded dense>
         <v-card-title>Update Bulletin</v-card-title>
         <v-divider></v-divider>
