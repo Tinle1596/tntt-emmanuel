@@ -1,5 +1,5 @@
 import { getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, deleteField } from 'firebase/firestore'
-import createPersistedState from 'vuex-persistedstate'
+import { convertUnixDate } from '../../common/formatter'
 
 const state = {
     // object: {
@@ -11,15 +11,23 @@ const state = {
     //     tags: []
     // }
     bulletins: [],
-    bulletin: {}
+    bulletin: {},
+    type: ['event', 'notification', 'post'],
+    tags: ['TNTT', 'HS', 'NS', 'TN', 'AU', 'TT', 'PH']
 }
 
 const getters = {
     getBulletins() {
         return state.bulletins;
     },
-    getBulletin(){
+    getBulletin() {
         return state.bulletin;
+    },
+    getBulletinType() {
+        return state.type;
+    },
+    getBulletinTags() {
+        return state.tags;
     }
 }
 
@@ -50,25 +58,46 @@ const actions = {
         await getDocs(collection(getFirestore(), 'bulletins'))
             .then((snapShot) => {
                 snapShot.forEach((doc) => {
-                    results.push({ id: doc.id, ...doc.data() });
+                    results.push({
+                        id: doc.id,
+                        title: doc.data().title,
+                        type: doc.data().type,
+                        eventDate: doc.data().eventDate !== null ? convertUnixDate(doc.data().eventDate.seconds) : null,
+                        postedDate: new Date(doc.data().postedDate.seconds * 1000),
+                        lastUpdated: new Date(doc.data().lastUpdated.seconds * 1000),
+                        text: doc.data().text,
+                        tags: doc.data().tags
+                    });
                 })
                 commit('SET_BULLETINS', results);
             })
             .catch((e) => {
-                alert('Unsuccessful opertion', e.message);
+                alert(e.message);
             })
     },
     // getting bulletin by id
-    async getBulletinById({ commit }, id) {
+    async getBulletinById({ commit }, id) {        
         const docRef = doc(getFirestore(), 'bulletins', id);
-        await getDoc(docRef).then((snapShot) =>{
-            if(snapShot.exists()) {            
-                const docData = snapShot.data()           
+        await getDoc(docRef).then((snapShot) => {
+            if (snapShot.exists()) {
+                const docData = {
+                    id: doc.id,
+                    title: snapShot.data().title,
+                    type: snapShot.data().type,
+                    eventDate: snapShot.data().eventDate !== null ? convertUnixDate(snapShot.data().eventDate.seconds) : null,
+                    postedDate: new Date(snapShot.data().postedDate.seconds * 1000),
+                    lastUpdated: new Date(snapShot.data().lastUpdated.seconds * 1000),
+                    text: snapShot.data().text,
+                    tags: snapShot.data().tags
+                }
                 commit('SET_BULLETIN', docData);
             } else {
                 alert('No document found');
-            }    
-        });        
+            }
+        })
+        .catch((e)=>{
+            alert(e.error);
+        });
     },
     // Creating Bulletin
     async createBulletin({ commit, payload }) {
