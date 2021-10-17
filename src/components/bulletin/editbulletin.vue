@@ -52,6 +52,7 @@
                 <v-chip color="accent">{{item}}</v-chip>
               </template>
             </v-select>
+            <v-btn color="primary" @click="updateBulletin(currentBulletin)">Update</v-btn>
           </v-form>
         </v-container>
       </v-card>
@@ -67,7 +68,6 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { convertUnixDate } from "../../common/formatter";
 
 export default {
   data: () => ({
@@ -81,7 +81,12 @@ export default {
       tags: 'getBulletinTags'
     }),
   },
-  methods: {},
+  methods: {
+    ...mapActions({
+      updateBulletin: 'updateBulletin'
+    }),
+    
+  },
   created() {
     this.$store.dispatch("getBulletinById", this.$route.params.id);
   },

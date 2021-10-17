@@ -81,7 +81,7 @@ const actions = {
         await getDoc(docRef).then((snapShot) => {
             if (snapShot.exists()) {
                 const docData = {
-                    id: doc.id,
+                    id: snapShot.id,
                     title: snapShot.data().title,
                     type: snapShot.data().type,
                     eventDate: snapShot.data().eventDate !== null ? convertUnixDate(snapShot.data().eventDate.seconds) : null,
@@ -119,22 +119,24 @@ const actions = {
             })
     },
     // Updating Bulletin
-    async updateBulletin({ commit, payload }) {
-        let ref = collection(getFirestore(), 'bulletins', payload.id);
+    async updateBulletin({ commit }, payload) {
+        console.log(new Date(payload.eventDate))
+        let ref = doc(getFirestore(), 'bulletins', payload.id);
         await updateDoc(ref, {
             title: payload.title,
             type: payload.type,
             text: payload.text,
-            postedDate: payload.postedDate,
-            isEvent: payload.isEvent,
-            eventDate: payload.eventDate,
+            // postedDate: payload.postedDate, posted date stays the same
+            eventDate: payload.eventDate !== null ? new Date(payload.eventDate) : null,
+            lastUpdated: new Date(),
             tags: payload.tags
         })
-            .then(() => {
-                commit('UPDATE_BULLETIN', result);
+            .then((result) => {
+                console.log('bulletin updated successfully')
+                // commit('UPDATE_BULLETIN', result);
             })
             .catch((e) => {
-                alert('Unsuccessful operation,', e.message);
+                alert(e.message);
             })
     },
 
