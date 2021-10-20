@@ -5,24 +5,29 @@
         <v-card-title>Update Bulletin</v-card-title>
         <v-divider></v-divider>
         <v-container>
+          <validation-observer ref="observer" v-slot="{ invalid }">
           <v-form>
+            <validation-provider v-slot="{errors}"
+            name="Title"
+            rules="required">
             <v-text-field
               v-model="currentBulletin.title"
               dense
               outlined
+              required
+              :error-messages="errors"
               label="Title"
             ></v-text-field>
+            </validation-provider>
             <v-select
               v-model="currentBulletin.type"
               :items="bulletinType"
               outlined
-              label="Type"
+              label="Type"              
               dense
             ></v-select>
-            <div v-if="currentBulletin.type == 'event'">
-              <v-card> </v-card>
+            <div v-if="currentBulletin.type == 'event'">              
               <v-row class="pa-3 justify-space-between">
-                <div>
                   <v-text-field
                     readonly
                     v-model="currentBulletin.eventDate"
@@ -31,33 +36,36 @@
                     outlined
                   >
                   </v-text-field>
-                </div>
-                <div>
                   <v-btn color="accent" dark @click="dialog = true">
                     Select Date
                   </v-btn>
-                </div>
               </v-row>
             </div>
+            <validation-provider v-slot="{errors}" name="Body" rules="required" >
             <v-textarea
               v-model="currentBulletin.text"
+              name="Body"
               outlined
               filled
               dense
+              required              
+              :error-messages="errors"              
               label="Body"
             ></v-textarea>
+            </validation-provider>
             <v-select chips v-model="currentBulletin.tags" :items="tags" multiple label="tags" outlined small-chips>
               <template #selection="{ item }">
                 <v-chip color="accent">{{item}}</v-chip>
               </template>
             </v-select>
-            <v-btn color="primary" @click="updateBulletin(currentBulletin)">Update</v-btn>
+            <v-btn color="primary" @click="onUpdate()" :disabled="invalid">Update</v-btn>
           </v-form>
+          </validation-observer>
         </v-container>
       </v-card>
     </v-container>
     <v-dialog v-model="dialog" persistent>
-      <v-card class="pa-1">
+      <v-card class="pa-1">        
         <v-date-picker v-model="currentBulletin.eventDate"></v-date-picker>
         <v-btn @click="dialog = false">Close</v-btn>
       </v-card>
@@ -66,13 +74,32 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
+import { required } from 'vee-validate/dist/rules'
+import { extend, ValidationObserver, ValidationProvider } from 'vee-validate';
+
+extend('required', {
+  ...required,
+  message: '{_field_} can not be empty'
+})
+
+
 
 export default {
   data: () => ({
     bulletin: {},
-    dialog: false,
+    dialog: false,    
+    titleRules: [
+      (v) => !!v || 'Title required'
+    ],
+    bodyRules: [
+      (v) => !!v || 'Please add information in body'
+    ]
   }),
+  components:{
+    ValidationObserver,
+    ValidationProvider
+  },
   computed: {
     ...mapGetters({
       currentBulletin: 'getBulletin',
@@ -84,7 +111,9 @@ export default {
     ...mapActions({
       updateBulletin: 'updateBulletin'
     }),
-    
+    onUpdate(){      
+      this.updateBulletin(this.currentBulletin)
+    }
   },
   created() {
     this.$store.dispatch("getBulletinById", this.$route.params.id);

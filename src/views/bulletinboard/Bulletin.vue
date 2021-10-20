@@ -1,32 +1,25 @@
 <template>
   <div class="bulletin">
-    {{currentBulletin}}
-    <h3>{{ $route.params.id }}</h3>
-    <v-btn :to="{ name: 'editbulletin', params: { id: $route.params.id } }"
-      >Edit</v-btn
-    >
+      <v-container>
+        <bulletin></bulletin>
+      </v-container>
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import bulletin from '../../components/bulletin/bulletin.vue'
 
 export default {
-  data: () => ({}),
-  components: {
-
-  },
-  computed: {
-    ...mapGetters({
-      currentBulletin: 'getBulletin'
-    })
-  },
-
-  created() {
-    
-  }
-};
+    data:() => ({
+    }),
+    props: {
+    },
+    components:{
+      bulletin
+    }
+}
 </script>
 
 <style>
+
 </style>
