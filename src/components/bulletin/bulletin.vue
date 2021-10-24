@@ -1,30 +1,46 @@
 <template>
   <div class="bulletin">
-    {{currentBulletin}}
-    <h3>{{ $route.params.id }}</h3>
-    <v-btn :to="{ name: 'editbulletin', params: {bulletin: currentBulletin, id: $route.params.id} }"
+    <v-card class="mx-auto" min-height="20vh">
+      <div>
+        <v-row>
+          <v-col cols="8">
+            <v-card-title>
+              <h5>"{{ bulletin.title }}"</h5>
+            </v-card-title>
+          </v-col>
+          <v-col cols="4">
+            <v-chip label :color="getBulletinType">{{ bulletin.type }}</v-chip>
+          </v-col>
+        </v-row>
+      </div>
+      <v-divider></v-divider>      
+    </v-card>
+    <!-- <v-btn :to="{ name: 'editbulletin', params: {bulletin: currentBulletin, id: $route.params.id} }"
       >Edit</v-btn
-    >
+    > -->
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-
 export default {
-  data: () => ({}),
-  components: {
-
+  props: {
+    bulletin: Object,
   },
   computed: {
-    ...mapGetters({
-      currentBulletin: 'getBulletin'
-    })
+    //['event', 'notification', 'post'],
+    getBulletinType() {
+      switch (this.bulletin.type) {
+        case "event":
+          return "light-blue";
+        case "notification":
+          return "light-green";
+        case "post":
+          return "grey";
+        default:
+          return "Grey";
+      }
+    },
   },
-
-  created() {
-    this.$store.dispatch("getBulletinById", this.$route.params.id)
-  }
 };
 </script>
 
