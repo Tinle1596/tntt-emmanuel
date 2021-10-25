@@ -2,23 +2,37 @@
   <div class="bulletins">
     <v-container fluid>
       <v-card class="mx-auto">
-        <v-list three-line>
+        <v-toolbar color="primary">
+          <v-toolbar-title class="font-weight-bold">
+            Thieu Nhi Bulletin Board
+          </v-toolbar-title>
+        </v-toolbar>
+        <v-list three-line class="pa-2">
           <v-list-item-group>
             <template v-for="(bulletin, index) in bulletins">
               <v-list-item :key="bulletin.title">
                 <v-list-item-content class="text-left align-self-start">
-                  <v-list-item-title v-text="bulletin.title" />
+                  <v-list-item-title class="font-weight-bold pa-1">
+                    <h3>"{{ bulletin.title }}"</h3>
+                  </v-list-item-title>
                   <div>
-                    <v-chip
-                      label
-                      :color="getBulletinType(bulletin.type)"
-                      x-small
-                      >
+                    <v-chip label :color="getBulletinType(bulletin.type)" small class="font-weight-bold">
                       <v-icon left>mdi-label-outline</v-icon>
                       {{ bulletin.type }}</v-chip
                     >
                   </div>
-                  <v-list-item-subtitle v-text="bulletin.tags"></v-list-item-subtitle>
+                  <div id="chips-container">
+                    Tags:
+                    <v-chip
+                      v-for="(tag, index) in bulletin.tags"
+                      :key="index"
+                      :class="tag"
+                      class="font-weight-bold ma-1 "
+                      x-small
+                      >{{ tag }}</v-chip
+                    >
+                  </div>
+                  <!-- <v-list-item-subtitle v-text="bulletin.tags"></v-list-item-subtitle> -->
                 </v-list-item-content>
                 <v-list-item-action>
                   <v-list-item-action-text
@@ -79,5 +93,33 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import '@/scss/_shared.scss';
+ 
+#chips-container .v-chip.TNTT {
+  background: $tntt;
+}
+#chips-container .v-chip.HS {
+  background: $hiep-si;
+}
+#chips-container .v-chip.NS {
+  background: $nghia-si;
+}
+#chips-container .v-chip.TN {
+  background: $thieu-ni;
+}
+#chips-container .v-chip.AU {
+  background: $au-nhi;
+}
+#chips-container .v-chip.TT {
+  background: $tro-ta;
+}
+#chips-container .v-chip.PH {
+  background: $phu-huynh;
+}
+#chips-container .v-chip.HT {
+  background: $huynh-truong;
+}
+
 </style>
+
