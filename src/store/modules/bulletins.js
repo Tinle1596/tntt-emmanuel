@@ -67,7 +67,7 @@ const actions = {
                         postedDate: new Date(doc.data().postedDate.seconds * 1000),
                         lastUpdated: new Date(doc.data().lastUpdated.seconds * 1000),
                         text: doc.data().text,
-                        tags: doc.data().tags
+                        tags: doc.data().tags,
                     });
                 })
                 commit('SET_BULLETINS', results);

@@ -1,30 +1,35 @@
 <template>
-  <div class="bulletin">
-    <v-card class="mx-auto" min-height="20vh">
-      <div>
-        <v-row>
-          <v-col cols="8">
-            <v-card-title>
-              <h5>"{{ bulletin.title }}"</h5>
-            </v-card-title>
-          </v-col>
-          <v-col cols="4">
-            <v-chip label :color="getBulletinType">{{ bulletin.type }}</v-chip>
-          </v-col>
-        </v-row>
-      </div>
-      <v-divider></v-divider>      
-    </v-card>
-    <!-- <v-btn :to="{ name: 'editbulletin', params: {bulletin: currentBulletin, id: $route.params.id} }"
-      >Edit</v-btn
-    > -->
-  </div>
+  <v-card min-height="70vh">
+    <v-toolbar dark color="secondary">
+      <v-toolbar-title>
+        {{ bulletin.title }}
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-chip small outlined label class="mt-3" text-color="white">{{
+          bulletin.postedDate.toLocaleDateString()
+        }}</v-chip>
+      </v-toolbar-items>
+    </v-toolbar>
+    <v-container>
+      <v-card-text>
+        <p class="text-left font-weight-bold black--text">
+          {{ bulletin.text }}
+        </p>
+      </v-card-text>
+    </v-container>
+  </v-card>
 </template>
 
 <script>
 export default {
   props: {
     bulletin: Object,
+  },
+  methods: {
+    onClickClose(event) {
+      this.$emit("clicked", "this value");
+    },
   },
   computed: {
     //['event', 'notification', 'post'],

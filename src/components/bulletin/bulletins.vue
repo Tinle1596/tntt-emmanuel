@@ -16,7 +16,12 @@
                     <h3>"{{ bulletin.title }}"</h3>
                   </v-list-item-title>
                   <div>
-                    <v-chip label :color="getBulletinType(bulletin.type)" small class="font-weight-bold">
+                    <v-chip
+                      label
+                      :color="getBulletinType(bulletin.type)"
+                      small
+                      class="font-weight-bold"
+                    >
                       <v-icon left>mdi-label-outline</v-icon>
                       {{ bulletin.type }}</v-chip
                     >
@@ -27,7 +32,7 @@
                       v-for="(tag, index) in bulletin.tags"
                       :key="index"
                       :class="tag"
-                      class="font-weight-bold ma-1 "
+                      class="font-weight-bold ma-1"
                       x-small
                       >{{ tag }}</v-chip
                     >
@@ -39,7 +44,19 @@
                     v-text="bulletin.postedDate.toLocaleDateString()"
                   >
                   </v-list-item-action-text>
-                  <v-btn depressed block bottom>view</v-btn>
+                  <v-dialog
+                    :key="index"
+                    v-model="bulletin.display"
+                    transition="dialog-bottom-transition"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn color="primary" dark v-bind="attrs" v-on="on"
+                        >View more</v-btn
+                      >
+                    </template>
+                      <bulletin :bulletin="bulletin"></bulletin>
+                    <v-btn class="mt-1" @click="bulletin.display = false" color="primary">close</v-btn>
+                  </v-dialog>
                 </v-list-item-action>
               </v-list-item>
               <v-divider :key="index"> </v-divider>
@@ -94,8 +111,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/scss/_shared.scss';
- 
+@import "@/scss/_shared.scss";
+
 #chips-container .v-chip.TNTT {
   background: $tntt;
 }
@@ -120,6 +137,5 @@ export default {
 #chips-container .v-chip.HT {
   background: $huynh-truong;
 }
-
 </style>
 
