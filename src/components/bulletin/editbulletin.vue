@@ -55,7 +55,9 @@
             </validation-provider>
             <v-select chips v-model="currentBulletin.tags" :items="tags" multiple label="tags" outlined small-chips>
               <template #selection="{ item }">
-                <v-chip color="accent">{{item}}</v-chip>
+                <div id="chips-container">
+                  <v-chip :class="item">{{item}}</v-chip>
+                </div>
               </template>
             </v-select>
             <v-btn color="primary" @click="onUpdate()" :disabled="invalid">Update</v-btn>
@@ -121,5 +123,31 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import "@/scss/_shared.scss";
+
+#chips-container .v-chip.TNTT {
+  background: $tntt;
+}
+#chips-container .v-chip.HS {
+  background: $hiep-si;
+}
+#chips-container .v-chip.NS {
+  background: $nghia-si;
+}
+#chips-container .v-chip.TN {
+  background: $thieu-ni;
+}
+#chips-container .v-chip.AU {
+  background: $au-nhi;
+}
+#chips-container .v-chip.TT {
+  background: $tro-ta;
+}
+#chips-container .v-chip.PH {
+  background: $phu-huynh;
+}
+#chips-container .v-chip.HT {
+  background: $huynh-truong;
+}
 </style>

@@ -37,7 +37,6 @@
                       >{{ tag }}</v-chip
                     >
                   </div>
-                  <!-- <v-list-item-subtitle v-text="bulletin.tags"></v-list-item-subtitle> -->
                 </v-list-item-content>
                 <v-list-item-action>
                   <v-list-item-action-text
@@ -57,6 +56,7 @@
                       <bulletin :bulletin="bulletin"></bulletin>
                     <v-btn class="mt-1" @click="bulletin.display = false" color="primary">close</v-btn>
                   </v-dialog>
+                  <v-btn class="mt-2" v-show="user" :to="{name: 'editbulletin', params: {id: bulletin.id}}">Edit</v-btn>
                 </v-list-item-action>
               </v-list-item>
               <v-divider :key="index"> </v-divider>
@@ -102,6 +102,7 @@ export default {
   computed: {
     ...mapGetters({
       bulletins: "getBulletins",
+      user: 'getUser'
     }),
   },
   created() {

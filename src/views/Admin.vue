@@ -1,7 +1,7 @@
 <template>
   <div class="admin">
     <v-container>
-      <under-construction/>
+      
     </v-container>
   </div>
 </template>

@@ -121,7 +121,6 @@ const actions = {
     },
     // Updating Bulletin
     async updateBulletin({ commit }, payload) {
-        console.log(new Date(payload.eventDate))
         let ref = doc(getFirestore(), 'bulletins', payload.id);
         await updateDoc(ref, {
             title: payload.title,
@@ -133,8 +132,7 @@ const actions = {
             tags: payload.tags
         })
             .then(() => {
-                console.log('bulletin updated successfully')
-                router.push({name: 'bulletin', params: {id: payload.id}});
+                router.push({name: 'bulletinboard'});
                 // commit('UPDATE_BULLETIN', result);
             })
             .catch((e) => {
