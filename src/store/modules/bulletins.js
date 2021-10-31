@@ -1,4 +1,4 @@
-import { getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, deleteField } from 'firebase/firestore'
+import { getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, deleteField, orderBy, limit, query } from 'firebase/firestore'
 import { convertUnixDate } from '../../common/formatter'
 import router from '../../router/index'
 
@@ -56,7 +56,8 @@ const actions = {
     // Getting Bulletins
     async setBulletins({ commit }) {
         const results = [];
-        await getDocs(collection(getFirestore(), 'bulletins'))
+        const q = query(collection(getFirestore(), 'bulletins'), orderBy('postedDate', 'desc'), limit(10))
+        await getDocs(q)
             .then((snapShot) => {
                 snapShot.forEach((doc) => {
                     results.push({
@@ -77,7 +78,7 @@ const actions = {
             })
     },
     // getting bulletin by id
-    async getBulletinById({ commit }, id) {        
+    async getBulletinById({ commit }, id) {
         const docRef = doc(getFirestore(), 'bulletins', id);
         await getDoc(docRef).then((snapShot) => {
             if (snapShot.exists()) {
@@ -96,9 +97,9 @@ const actions = {
                 alert('No document found');
             }
         })
-        .catch((e)=>{
-            alert(e.error);
-        });
+            .catch((e) => {
+                alert(e.error);
+            });
     },
     // Creating Bulletin
     async createBulletin({ commit, payload }) {
@@ -127,12 +128,12 @@ const actions = {
             type: payload.type,
             text: payload.text,
             // postedDate: payload.postedDate, posted date stays the same
-            eventDate: payload.eventDate !== null ? new Date(payload.eventDate) : null,
+            eventDate: payload.eventDate !== null && payload.type === 'event' ? new Date(payload.eventDate) : null,
             lastUpdated: new Date(),
             tags: payload.tags
         })
             .then(() => {
-                router.push({name: 'bulletinboard'});
+                router.push({ name: 'bulletinboard' });
                 // commit('UPDATE_BULLETIN', result);
             })
             .catch((e) => {
