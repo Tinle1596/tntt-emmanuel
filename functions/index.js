@@ -9,7 +9,7 @@ exports.addAdminRole = functions.https.onCall((data, context) => {
         return admin.auth().setCustomUserClaims(user.uid, { admin: true });
     }).then(() => {
         return {
-            message: 'Successfully added ${data.email} has been made an admin'
+            message: `Successfully added ${data.email} as an admin`
         }
     }).catch(e => {
         return e;

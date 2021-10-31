@@ -1,4 +1,5 @@
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { getFunctions, httpsCallable } from 'firebase/functions'
 import router from '../../router/index'
 
 const state = {
@@ -40,7 +41,19 @@ const actions = {
         } catch (e) {
             alert(e.message);
         }
-    },    
+    },
+    async addAdminRoleToUser({commit}, payload) {
+        console.log(payload)
+        const functions = getFunctions();
+        const addAdminRole = httpsCallable(functions, 'addAdminRole');
+        addAdminRole({ email: payload })
+        .then(result => {
+            console.log(result)
+        })
+        .catch(e => {
+            console.log(e)
+        })
+    }
 }
 
 export default {

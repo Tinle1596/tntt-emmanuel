@@ -1,17 +1,17 @@
 <template>
   <div class="admin">
-    <v-container>
-      
-    </v-container>
+    <manage-user></manage-user>
   </div>
 </template>
 
 <script>
 import UnderConstruction from "../components/common/underconstruction.vue";
+import ManageUser from "../components/admin/manageusers.vue"
 
 export default {
   components: {
-    UnderConstruction
+    UnderConstruction,
+    ManageUser
   },
 };
 </script>
