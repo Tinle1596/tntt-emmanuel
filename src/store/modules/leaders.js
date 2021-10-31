@@ -1,4 +1,4 @@
-import { getFirestore, collection, getDocs } from 'firebase/firestore'
+import { getFirestore, collection, getDocs, query, orderBy } from 'firebase/firestore'
 
 const state = {
     leaders: []
@@ -19,8 +19,9 @@ const mutations = {
 const actions = {
     async setLeaders({ commit }) {
         const results = [];
+        const q = query(collection(getFirestore(), 'leaders'), orderBy('type'))
         try {
-            const snap = await getDocs(collection(getFirestore(), 'leaders'));
+            const snap = await getDocs(q);
             snap.forEach((doc) => {
                 results.push({ id: doc.id, ...doc.data() });
             })
