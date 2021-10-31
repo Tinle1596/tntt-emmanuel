@@ -45,8 +45,7 @@
                   </v-list-item-action-text>
                   <v-dialog
                     :key="index"
-                    v-model="bulletin.display"
-                    transition="dialog-bottom-transition"
+                    v-model="bulletin.display"                    
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn color="primary" dark v-bind="attrs" v-on="on"
