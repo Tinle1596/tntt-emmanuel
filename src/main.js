@@ -15,8 +15,9 @@ const app = new Vue({
 })
 
 const auth = getAuth();
-auth.onAuthStateChanged(user => {  
-  store.commit('SET_USER', user)
+auth.onAuthStateChanged(user => {
+  store.commit('SET_USER', user);
+  store.dispatch('setNavbarLinks');
   app.$mount('#app')
 })
 

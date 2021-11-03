@@ -1,9 +1,10 @@
 <template>
   <div class="manage-users">
     <v-container>
-      <h2>Add user as admin</h2>
+      <h2>Add user to a role</h2>
       <v-text-field v-model="email"></v-text-field>
-      <v-btn @click="addAdminRole(email)">submit</v-btn>
+      <v-btn @click="addAdminRole(email)">add admin</v-btn>
+      <v-btn @click="addTeacherRole(email)">add teacher</v-btn>
     </v-container>
   </div>
 </template>
@@ -18,7 +19,8 @@ export default {
   }),
   methods: {
       ...mapActions({
-          addAdminRole: 'addAdminRoleToUser'
+          addAdminRole: 'addAdminRoleToUser',
+          addTeacherRole: 'addTeacherRoleToUser'
       })
   }
 };

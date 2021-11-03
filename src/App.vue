@@ -13,7 +13,6 @@
 // @ is an alias to /src
 import navbar from './components/nagivation/navbar.vue'
 
-
 export default {
   name: "Home",
   components: {
@@ -22,7 +21,7 @@ export default {
   data: () => ({
     drawer: false,
     group: null,
-  })  
+  }),  
 };
 </script>
 

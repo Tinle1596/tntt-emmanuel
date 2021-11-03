@@ -4,9 +4,7 @@ import translationmanager from './modules/translationmanager'
 import leaders from './modules/leaders'
 import auth from './modules/auth'
 import bulletins from './modules/bulletins'
-
-
-
+import navigation from './modules/navigation'
 
 Vue.use(Vuex);
 
@@ -17,7 +15,8 @@ export default new Vuex.Store({
     translationmanager,
     leaders,
     auth,
-    bulletins
+    bulletins,
+    navigation
   },
   strict: false
 });

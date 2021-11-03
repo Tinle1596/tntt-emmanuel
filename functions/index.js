@@ -15,3 +15,17 @@ exports.addAdminRole = functions.https.onCall((data, context) => {
         return e;
     });
 })
+
+exports.addTeacherRole = functions.https.onCall((data, context) => {
+    // get user
+    return admin.auth().getUserByEmail(data.email).then(user => {
+        // add custom claim to user (admin)
+        return admin.auth().setCustomUserClaims(user.uid, { teacher: true });
+    }).then(() => {
+        return {
+            message: `Successfully added ${data.email} as a teacher`
+        }
+    }).catch(e => {
+        return e;
+    });
+})
