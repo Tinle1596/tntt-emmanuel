@@ -1,5 +1,4 @@
 import { getAuth } from 'firebase/auth'
-import store from '..';
 
 const state = {
     links: [
@@ -44,8 +43,16 @@ const getters = {
 }
 
 const mutations = {    
-    ADD_LINK(state, payload) {
-        state.userLinks.push(payload)
+    SET_USER_LINKS(state, payload) {
+        let links = state.links
+        let userLinks = [];
+
+        links.forEach(link => {
+            if (link.claims.includes(payload)) {
+                userLinks.push(link)
+            }            
+        })
+        state.userLinks = userLinks;
     },
     CLEAR_LINKS(state) {
         state.userLinks = [];
@@ -53,50 +60,52 @@ const mutations = {
 }
 
 const actions = {
-    clearLinks({commit}) {
-        commit('CLEAR_LINKS')
-    },
     async setNavbarLinks({ dispatch, commit }) {
         await dispatch('clearLinks')
-        const auth = getAuth()         
+        const auth = getAuth()
         let links = state.links
         if (auth.currentUser !== null) {
             await auth.currentUser.getIdTokenResult()
                 .then((idTokenResult) => {
-                    links.forEach((link) => {
-                        switch (true) {
-                            case idTokenResult.claims.hasOwnProperty("admin") && link.claims.includes("admin"):
-                                //allow all links
-                                commit('ADD_LINK', link);                                
-                                break;
-                            case idTokenResult.claims.hasOwnProperty("teacher") && link.claims.includes("teacher"):
-                                //allow some links                      
-                                commit('ADD_LINK', link);
-                                break;
-                            case idTokenResult.claims.hasOwnProperty("parent") && link.claims.includes("parent"):
-                                //allow only a few links
-                                commit('ADD_LINK', link);
-                                break;
-                            case idTokenResult.claims.hasOwnProperty("student") && link.claims.includes("student"):
-                                //allow only a few links
-                                commit('ADD_LINK', link);
-                                break;
-                            default:
-                                //allow minimal links
-                                if (link.claims.includes('guest')) {
-                                    commit('ADD_LINK', link);
-                                }
-                                break;
-                        }
-                    })
+                    switch (true) {
+                        case idTokenResult.claims.hasOwnProperty("admin"):
+                            //allow all links
+                            commit('SET_USER_LINKS', 'admin')
+                            break;
+                        case idTokenResult.claims.hasOwnProperty("teacher"):
+                            //allow some links                      
+                            commit('SET_USER_LINKS', 'teacher')
+                            break;
+                        case idTokenResult.claims.hasOwnProperty("parent"):
+                            //allow only a few links
+                            commit('SET_USER_LINKS', 'parent')
+                            break;
+                        case idTokenResult.claims.hasOwnProperty("student"):
+                            //allow only a few links
+                            commit('SET_USER_LINKS', 'student')
+                            break;
+                        default:
+                            //allow minimal links
+                            if (link.claims.includes('guest')) {
+                                commit('SET_USER_LINKS', 'guest')
+                            }
+                            break;
+                    }
                 })
         } else {
             links.forEach((link) => {
                 if (link.claims.includes('guest')) {
-                    commit('ADD_LINK', link);
+                    commit('SET_USER_LINKS', 'guest')
                 }
             })
         }
+    },
+    clearLinks({ commit }) {
+        commit('CLEAR_LINKS')
+    },
+    buildUserLinks({ commit }, claim) {
+        let links = state.links
+        let userLinks = [];
     }
 }
 

@@ -34,7 +34,7 @@
         <v-btn class="ma-1" color="accent" v-if="!user" :to="login"
           >Login</v-btn
         >
-        <v-btn class="ma-1" color="red" v-else :to="logout">Log out</v-btn>
+        <v-btn class="ma-1" color="grey" v-else :to="logout">Log out</v-btn>
         <div class="pa-1">
           <v-card elevation="0" class="d-flex justify-space-between">
             <div class="pa-2 align-self-center">Tiếng Việt</div>
