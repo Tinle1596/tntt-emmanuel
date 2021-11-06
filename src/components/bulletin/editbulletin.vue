@@ -85,8 +85,6 @@ extend('required', {
   message: '{_field_} can not be empty'
 })
 
-
-
 export default {
   data: () => ({
     bulletin: {},

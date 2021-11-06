@@ -1,4 +1,5 @@
 import { getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, deleteField, orderBy, limit, query } from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
 import { convertUnixDate } from '../../common/formatter'
 import router from '../../router/index'
 
@@ -56,7 +57,7 @@ const actions = {
     // Getting Bulletins
     async setBulletins({ commit }) {
         const results = [];
-        const q = query(collection(getFirestore(), 'bulletins'), orderBy('postedDate', 'desc'), limit(10))
+        const q = query(collection(getFirestore(), 'bulletins'), orderBy('createdDate', 'desc'), limit(10))
         await getDocs(q)
             .then((snapShot) => {
                 snapShot.forEach((doc) => {
@@ -65,10 +66,13 @@ const actions = {
                         title: doc.data().title,
                         type: doc.data().type,
                         eventDate: doc.data().eventDate !== null ? convertUnixDate(doc.data().eventDate.seconds) : null,
-                        postedDate: new Date(doc.data().postedDate.seconds * 1000),
-                        lastUpdated: new Date(doc.data().lastUpdated.seconds * 1000),
+                        createdDate: new Date(doc.data().createdDate.seconds * 1000),
+                        createdBy: doc.data().createdBy,                        
+                        updatedDate: doc.data().updatedDate !== null ? new Date(doc.data().updatedDate.seconds * 1000) : null,
+                        updatedBy: doc.data().updatedBy ?? null,
                         text: doc.data().text,
                         tags: doc.data().tags,
+                        posted: doc.data().posted
                     });
                 })
                 commit('SET_BULLETINS', results);
@@ -87,10 +91,13 @@ const actions = {
                     title: snapShot.data().title,
                     type: snapShot.data().type,
                     eventDate: snapShot.data().eventDate !== null ? convertUnixDate(snapShot.data().eventDate.seconds) : null,
-                    postedDate: new Date(snapShot.data().postedDate.seconds * 1000),
-                    lastUpdated: new Date(snapShot.data().lastUpdated.seconds * 1000),
+                    createdDate: new Date(snapShot.data().createdDate.seconds * 1000),
+                    createdBy: snapShot.data().createdBy,
+                    updatedDate: snapShot.data().updatedDate !== null ? new Date(snapShot.data().updatedDate.seconds * 1000) : null,
+                    updatedBy: snapShot.data().updatedBy ?? null,
                     text: snapShot.data().text,
-                    tags: snapShot.data().tags
+                    tags: snapShot.data().tags,
+                    posted: snapShot.data().posted
                 }
                 commit('SET_BULLETIN', docData);
             } else {
@@ -108,8 +115,8 @@ const actions = {
             title: payload.title,
             type: payload.type,
             text: payload.text,
-            postedDate: payload.postedDate,
-            isEvent: payload.isEvent,
+            createdDate: payload.createdDate,
+            createdBy: getAuth().currentUser.uid,
             eventDate: payload.eventDate,
             tags: payload.tags
         })
@@ -126,10 +133,10 @@ const actions = {
         await updateDoc(ref, {
             title: payload.title,
             type: payload.type,
-            text: payload.text,
-            // postedDate: payload.postedDate, posted date stays the same
+            text: payload.text,            
             eventDate: payload.eventDate !== null && payload.type === 'event' ? new Date(payload.eventDate) : null,
-            lastUpdated: new Date(),
+            updatedBy: getAuth().currentUser.uid,
+            updatedDate: new Date(),
             tags: payload.tags
         })
             .then(() => {

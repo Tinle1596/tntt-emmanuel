@@ -40,7 +40,7 @@
                 </v-list-item-content>
                 <v-list-item-action>
                   <v-list-item-action-text
-                    v-text="bulletin.postedDate.toLocaleDateString()"
+                    v-text="bulletin.createdDate.toLocaleDateString()"
                   >
                   </v-list-item-action-text>
                   <v-dialog
