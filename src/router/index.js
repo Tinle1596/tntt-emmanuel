@@ -34,7 +34,13 @@ const routes = [
     name: 'bulletinboard',
     component: () => import('../views/bulletinboard/BulletinBoard.vue'),
     meta: {requiresAuth: true}
-  },  
+  },
+  {
+    path: '/bulletinboard/create',
+    name: 'createbulletin',
+    component: () => import('../views/bulletinboard/CreateBulletin.vue'),
+    meta: {requiresAuth: true}
+  },
   {
     path: '/bulletinboard/bulletin/edit/:id',
     name: 'editbulletin',

@@ -118,6 +118,8 @@ const actions = {
             createdDate: payload.createdDate,
             createdBy: getAuth().currentUser.uid,
             eventDate: payload.eventDate,
+            updatedBy: null,
+            updatedDate: null,
             tags: payload.tags
         })
             .then(() => {

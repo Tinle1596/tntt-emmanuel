@@ -108,17 +108,7 @@ export default {
         default:
           return "Grey";
       }
-    },
-    // checkClaim() {
-    //   if (
-    //     this.userClaims.hasOwnProperty("admin") ||
-    //     this.userClaims.hasOwnProperty("teacher")
-    //   ) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // },
+    },    
   },
   computed: {
     ...mapGetters({
