@@ -6,6 +6,12 @@
           <v-toolbar-title class="font-weight-bold">
             Thieu Nhi Bulletin Board
           </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items v-if="dataReady && checkClaim">
+            <v-btn icon>
+              <v-icon>mdi-plus-box-outline</v-icon>
+            </v-btn>
+          </v-toolbar-items>
         </v-toolbar>
         <v-list three-line class="pa-2">
           <v-list-item-group>
@@ -43,19 +49,26 @@
                     v-text="bulletin.createdDate.toLocaleDateString()"
                   >
                   </v-list-item-action-text>
-                  <v-dialog
-                    :key="index"
-                    v-model="bulletin.display"                    
-                  >
+                  <v-dialog :key="index" v-model="bulletin.display">
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn color="primary" dark v-bind="attrs" v-on="on"
                         >View more</v-btn
                       >
                     </template>
-                      <bulletin :bulletin="bulletin"></bulletin>
-                    <v-btn class="mt-1" @click="bulletin.display = false" color="primary">close</v-btn>
+                    <bulletin :bulletin="bulletin"></bulletin>
+                    <v-btn
+                      class="mt-1"
+                      @click="bulletin.display = false"
+                      color="primary"
+                      >close</v-btn
+                    >
                   </v-dialog>
-                  <v-btn class="mt-2" v-show="user" :to="{name: 'editbulletin', params: {id: bulletin.id}}">Edit</v-btn>
+                  <v-btn
+                    class="mt-2"
+                    v-show="user"
+                    :to="{ name: 'editbulletin', params: { id: bulletin.id } }"
+                    >Edit</v-btn
+                  >
                 </v-list-item-action>
               </v-list-item>
               <v-divider :key="index"> </v-divider>
@@ -63,9 +76,6 @@
           </v-list-item-group>
         </v-list>
       </v-card>
-      <!-- <div v-for="(bulletin, index) in bulletins" :key="index"> -->
-
-      <!-- <bulletin :bulletin="bulletin"></bulletin> -->
     </v-container>
   </div>
 </template>
@@ -75,7 +85,9 @@ import { mapGetters, mapActions } from "vuex";
 import Bulletin from "./bulletin.vue";
 
 export default {
-  data: () => ({}),
+  data: () => ({
+    dataReady: false,
+  }),
   components: {
     Bulletin,
   },
@@ -97,15 +109,41 @@ export default {
           return "Grey";
       }
     },
+    // checkClaim() {
+    //   if (
+    //     this.userClaims.hasOwnProperty("admin") ||
+    //     this.userClaims.hasOwnProperty("teacher")
+    //   ) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // },
   },
   computed: {
     ...mapGetters({
       bulletins: "getBulletins",
-      user: 'getUser'
+      user: "getUser",
+      userClaims: "getUserClaim",
     }),
+    checkClaim() {
+      if (
+        this.userClaims.hasOwnProperty("admin") ||
+        this.userClaims.hasOwnProperty("teacher")
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
   created() {
     this.$store.dispatch("setBulletins");
+  },
+  async mounted() {
+    await this.$store.dispatch("setCustomClaim").then(() => {
+      this.dataReady = true;
+    });
   },
 };
 </script>

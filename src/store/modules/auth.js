@@ -19,6 +19,9 @@ const getters = {
 const mutations = {
     SET_USER(state, payload) {
         state.user = payload
+    },
+    SET_USER_CLAIM(state, payload){
+        state.claim  = payload
     }
 }
 
@@ -68,7 +71,7 @@ const actions = {
                 console.log(e)
             })
     },
-    async setUserCustomClaims({ commit }, payload) {        
+    async setCustomClaim ({ commit }, payload) {        
         const auth = getAuth();
         if(auth.currentUser !== null){
             await auth.currentUser.getIdTokenResult()

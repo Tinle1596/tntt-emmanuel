@@ -7,7 +7,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-chip small outlined label class="mt-3" text-color="white">{{
-          bulletin.postedDate.toLocaleDateString()
+          bulletin.createdDate.toLocaleDateString()
         }}</v-chip>
       </v-toolbar-items>
     </v-toolbar>

@@ -102,11 +102,7 @@ const actions = {
     },
     clearLinks({ commit }) {
         commit('CLEAR_LINKS')
-    },
-    buildUserLinks({ commit }, claim) {
-        let links = state.links
-        let userLinks = [];
-    }
+    },    
 }
 
 export default {
