@@ -8,7 +8,7 @@
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items v-if="dataReady && checkClaim">
-            <v-btn icon>
+            <v-btn icon :to="{ name: 'createbulletin'}" >
               <v-icon>mdi-plus-box-outline</v-icon>
             </v-btn>
           </v-toolbar-items>
@@ -55,7 +55,7 @@
                         >View more</v-btn
                       >
                     </template>
-                    <bulletin :bulletin="bulletin"></bulletin>
+                    <bulletin-info :bulletin="bulletin"></bulletin-info>
                     <v-btn
                       class="mt-1"
                       @click="bulletin.display = false"
@@ -82,14 +82,14 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Bulletin from "./bulletin.vue";
+import BulletinInfo from "./bulletininfo.vue";
 
 export default {
   data: () => ({
     dataReady: false,
   }),
   components: {
-    Bulletin,
+    BulletinInfo,
   },
   methods: {
     ...mapActions({

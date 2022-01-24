@@ -13,7 +13,8 @@ const state = {
     //     tags: []
     // }
     bulletins: [],
-    bulletin: {},
+    editBulletin: {},
+    createBulletin: {},
     type: ['event', 'notification', 'post'],
     tags: ['TNTT', 'HS', 'NS', 'TN', 'AU', 'TT', 'PH']
 }
@@ -22,14 +23,17 @@ const getters = {
     getBulletins() {
         return state.bulletins;
     },
-    getBulletin() {
-        return state.bulletin;
+    getEditBulletin() {
+        return state.editBulletin;
     },
     getBulletinType() {
         return state.type;
     },
     getBulletinTags() {
         return state.tags;
+    },
+    getCreateBulletin() {
+        return state.createBulletin;
     }
 }
 
@@ -38,7 +42,7 @@ const mutations = {
         state.bulletins = val;
     },
     SET_BULLETIN(state, val) {
-        state.bulletin = val
+        state.editBulletin = val
     },
     CREATE_BULLETIN(state, val) {
         state.bulletins.push(val);
@@ -109,21 +113,23 @@ const actions = {
             });
     },
     // Creating Bulletin
-    async createBulletin({ commit, payload }) {
+    async createBulletin({ commit }, payload) {
         let ref = collection(getFirestore(), 'bulletins');
         const result = await addDoc(ref, {
             title: payload.title,
             type: payload.type,
             text: payload.text,
-            createdDate: payload.createdDate,
+            createdDate: new Date(),
             createdBy: getAuth().currentUser.uid,
-            eventDate: payload.eventDate,
+            eventDate: payload.eventDate ?? null,
             updatedBy: null,
             updatedDate: null,
-            tags: payload.tags
+            tags: payload.tags,
+            posted: false
         })
             .then(() => {
-                commit('CREATE_BULLETIN', result);
+                //commit('CREATE_BULLETIN', result);
+                router.push({name: 'bulletinboard'});
             })
             .catch((e) => {
                 alert('Unsuccessful operation,', e.message);
